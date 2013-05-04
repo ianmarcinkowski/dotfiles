@@ -1,103 +1,91 @@
-" Use Vim settings, rather then Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
-set nocompatible
+" General
+let mapleader = ','
+let g:mapleader = ','
 
-" TODO: this may not be in the correct place. It is intended to allow overriding <Leader>.
-" source ~/.vimrc.before if it exists.
-if filereadable(expand("~/.vimrc.before"))
-  source ~/.vimrc.before
-endif
-
-" ================ General Config ====================
-
-set number                      "Line numbers are good
-set backspace=indent,eol,start  "Allow backspace in insert mode
-set history=1000                "Store lots of :cmdline history
-set showcmd                     "Show incomplete cmds down the bottom
-set showmode                    "Show current mode down the bottom
-set gcr=a:blinkon0              "Disable cursor blink
-set visualbell                  "No sounds
-set autoread                    "Reload files changed outside vim
-
-" This makes vim act like all other editors, buffers can
-" exist in the background without being in a window.
-" http://items.sjbach.com/319/configuring-vim-right
-set hidden
-
-"turn on syntax highlighting
+set directory=~/.vim/swap,.
+set backspace=0
+set softtabstop=4
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set smarttab
+set sw=4
+set bg=dark
+set ai
+set number
+set ruler
+set hlsearch
+set cc=80
+set cursorline
 syntax on
 
-" Change leader to a comma because the backslash is too far away
-" That means all \x commands turn into ,x
-" The mapleader has to be set before vundle starts loading all 
-" the plugins.
-let mapleader=","
+" Vim clipboard to OSX clipboard
+set clipboard=unnamed
 
-" =============== Vundle Initialization ===============
-" This loads all the plugins specified in ~/.vim/vundle.vim
-" Use Vundle plugin to manage all other plugins
-if filereadable(expand("~/.vim/vundles.vim"))
-  source ~/.vim/vundles.vim
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+match ExtraWhitespace /\s\+$\| \+\ze\t/
+match ExtraWhitespace /[^\t]\zs\t\+/
+
+" highlight PreBracketSpaces ctermbg=green guibg=green
+" match PreBracketSpaces /\w\s(/
+
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+au InsertLeave * match ExtraWhitespace /\s\+$/
+
+au BufReadPost *inc set filetype=php
+au BufReadPost *module set filetype=php
+au BufReadPost *mako set filetype=html
+au BufReadPost *less set filetype=less
+au BufReadPost *py.* set filetype=python
+
+if has('statusline')
+        set laststatus=2
+
+        " Broken down into easily includeable segments
+        set statusline=%<%f\   " Filename
+        set statusline+=\ [%{&ff}/%Y]            " filetype
+        set statusline+=%h%m%r%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
 endif
 
-" ================ Turn Off Swap Files ==============
+:nmap <F1> <nop>
+:imap <F1> <nop>
 
-set noswapfile
-set nobackup
-set nowb
+" window navigation
+:imap <silent> <C-w> <C-o><C-w>
+"up
+:map <silent> <C-k> :wincmd k<CR>
+"down
+:map <silent> <C-j> :wincmd j<CR>
+"left
+:map <silent> <C-h> :wincmd h<CR>
+"right
+:map <silent> <C-l> :wincmd l<CR>
 
-" ================ Persistent Undo ==================
-" Keep undo history across sessions, by storing in file.
-" Only works all the time.
+" window sizing
+" decrease
+:map <silent> <leader>- <C-W>-
 
-silent !mkdir ~/.vim/backups > /dev/null 2>&1
-set undodir=~/.vim/backups
-set undofile
+:map <silent> <leader>p :set invpaste<CR>
+:map <silent> <leader>n :set invnumber<CR>
 
-" ================ Indentation ======================
+" window splitting
+:nmap <leader>s<right> :botright vnew<CR>
+:nmap <leader>sh :leftabove  vnew<CR>
+:nmap <leader>sl :rightbelow vnew<CR>
 
-set autoindent
-set smartindent
-set smarttab
-set shiftwidth=2
-set softtabstop=2
-set tabstop=2
-set expandtab
+" swap windows
+:nmap <leader>w <C-w>r<CR>
+
+" diff commands
+:nmap <leader>dg :diffget<CR>
+:nmap <leader>dp :diffput<CR>
+
+nnoremap <space> za
+
+" Disable K
+noremap K <NOP>
 
 filetype plugin on
-filetype indent on
+let g:pydiction_location = '/Users/ian/.vim/after/ftplugin/complete-dict'
 
-" Display tabs and trailing spaces visually
-set list listchars=tab:\ \ ,trail:·
-
-set nowrap       "Don't wrap lines
-set linebreak    "Wrap lines at convenient points
-
-" ================ Folds ============================
-
-set foldmethod=indent   "fold based on indent
-set foldnestmax=3       "deepest fold is 3 levels
-set nofoldenable        "dont fold by default
-
-" ================ Completion =======================
-
-set wildmode=list:longest
-set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
-set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
-set wildignore+=*vim/backups*
-set wildignore+=*sass-cache*
-set wildignore+=*DS_Store*
-set wildignore+=vendor/rails/**
-set wildignore+=vendor/cache/**
-set wildignore+=*.gem
-set wildignore+=log/**
-set wildignore+=tmp/**
-set wildignore+=*.png,*.jpg,*.gif
-
-"
-
-" ================ Scrolling ========================
-
-set scrolloff=8         "Start scrolling when we're 8 lines away from margins
-set sidescrolloff=15
-set sidescroll=1

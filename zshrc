@@ -59,8 +59,14 @@ alias clone='virtualenv-clone'
 alias pydevelop='python setup.py develop'
 alias pyinstall='python setup.py install'
 alias grep='grep --color'
+alias psqlplaypen='psql -h playpen.beanfield.com boss_stage'
+alias psqlbss='psql -h bssmowat.beanfield.com boss'
 alias beandev='cd bean.models && pydevelop && cd ../bean.lib && pydevelop && cd ../bean.iptv && pydevelop && cd ../bean && pydevelop'
 alias migrate='migrate.py'
+alias bossmux='~/.tmux/boss'
+alias tlist='tmux list-sessions'
+alias tattach='tmux attach-session -t'
+alias tnew='tmux new-session -s'
 
 function myls () { ls -la "$@" }
 function up() { local p= i=${1:-1}; while (( i-- )); do p+=../; done; cd "$p$2" && pwd; }
@@ -70,7 +76,7 @@ export PATH=/usr/local/postgresql-9.1/bin:~/.local/bin:~/code/Python-2.7.3/Tools
 export LSCOLORS='cxfxcxdxbxegedabagacad'
 export CLICOLOR_FORCE=1
 export WORKON_HOME=$HOME/.virtualenvs
-source /usr/local/bin/virtualenvwrapper.sh
+source /etc/bash_completion.d/virtualenvwrapper
 export GREP_COLOR=1
 
 # auto-completion:

@@ -67,6 +67,7 @@ alias bossmux='~/.tmux/boss'
 alias tlist='tmux list-sessions'
 alias tattach='tmux attach-session -t'
 alias tnew='tmux new-session -s'
+alias therapist='cd ~/code/splintermind-attributes && sudo ~/code/splintermind-attributes/bin/release/DwarfTherapist'
 
 function myls () { ls -la "$@" }
 function up() { local p= i=${1:-1}; while (( i-- )); do p+=../; done; cd "$p$2" && pwd; }

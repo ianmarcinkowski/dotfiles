@@ -8,25 +8,6 @@ ZDOTDIR="${HOME}/zsh"
 # time that oh-my-zsh is loaded.
 ZSH_THEME="ianmarcinkowski"
 
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
-
-# Comment this out to disable weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment following line if you want to disable colors in ls
-# DISABLE_LS_COLORS="true"
-
-# Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment following line if you want red dots to be displayed while waiting for completion
-# COMPLETION_WAITING_DOTS="true"
-
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
@@ -40,8 +21,8 @@ unsetopt correct_all
 # Customize to your needs...
 #
 # aliases
-alias la='ls -alG'
-alias ls='ls -G'
+alias la='ls -alG --color=auto'
+alias ls='ls -G --color=auto'
 alias ..="cd .."
 alias ..2="cd ../.."
 alias ..3="cd ../../.."
@@ -69,12 +50,10 @@ alias tattach='tmux attach-session -t'
 alias tnew='tmux new-session -s'
 alias therapist='cd ~/code/splintermind-attributes && sudo ~/code/splintermind-attributes/bin/release/DwarfTherapist'
 
-function myls () { ls -la "$@" }
 function up() { local p= i=${1:-1}; while (( i-- )); do p+=../; done; cd "$p$2" && pwd; }
 
 # from bash_profile
 export PATH=/usr/local/postgresql-9.1/bin:~/.local/bin:~/code/Python-2.7.3/Tools/i18n:$PATH
-export LSCOLORS='cxfxcxdxbxegedabagacad'
 export CLICOLOR_FORCE=1
 export WORKON_HOME=$HOME/.virtualenvs
 source /etc/bash_completion.d/virtualenvwrapper
@@ -113,8 +92,8 @@ if [[ ${TERM} == linux ]] || [[ ${TERM} =~ screen && ${+DISPLAY} == 0 ]]; then
 fi
 
 # Fish-like syntax highlighting for ZSH:
-if [[ -f /usr/share/zsh/plugins/zsh-syntax-highlight/zsh-syntax-highlighting.zsh ]]; then
-  . /usr/share/zsh/plugins/zsh-syntax-highlight/zsh-syntax-highlighting.zsh
+if [[ -f $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+  . $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
   # override some colors:
   ZSH_HIGHLIGHT_STYLES[default]='none'

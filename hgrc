@@ -4,7 +4,7 @@ churn=
 color=
 pager=
 graphlog=
-prompt=/Users/ian/code/hg-prompt/prompt.py
+prompt=~/code/hg-prompt/prompt.py
 record=
 [ui]
 username = Ian Marcinkowski <ian@beanfield.com>

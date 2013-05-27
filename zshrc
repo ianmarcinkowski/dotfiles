@@ -11,7 +11,7 @@ ZSH_THEME="ianmarcinkowski"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(git mercurial)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -48,12 +48,14 @@ alias bossmux='~/.tmux/boss'
 alias tlist='tmux list-sessions'
 alias tattach='tmux attach-session -t'
 alias tnew='tmux new-session -s'
+alias hswitch='hg update'
 alias therapist='cd ~/code/splintermind-attributes && sudo ~/code/splintermind-attributes/bin/release/DwarfTherapist'
 
 function up() { local p= i=${1:-1}; while (( i-- )); do p+=../; done; cd "$p$2" && pwd; }
 
 # from bash_profile
 export PATH=/usr/local/postgresql-9.1/bin:~/.local/bin:~/code/Python-2.7.3/Tools/i18n:$PATH
+export LSCOLORS='cxfxcxdxbxegedabagacad'
 export CLICOLOR_FORCE=1
 export WORKON_HOME=$HOME/.virtualenvs
 source /etc/bash_completion.d/virtualenvwrapper

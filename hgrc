@@ -1,0 +1,13 @@
+[extensions]
+convert=
+churn=
+color=
+pager=
+graphlog=
+prompt=/Users/ian/code/hg-prompt/prompt.py
+record=
+[ui]
+username = Ian Marcinkowski <ian@beanfield.com>
+[alias]
+branches = branches -a
+heads = heads -t

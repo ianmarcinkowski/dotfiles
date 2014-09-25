@@ -15,9 +15,11 @@ set ai
 set number
 set ruler
 set hlsearch
-set cc=80
+set cc=80,100
 set cursorline
 syntax on
+
+execute pathogen#infect()
 
 " Vim clipboard to OSX clipboard
 set clipboard=unnamed
@@ -81,11 +83,25 @@ endif
 :nmap <leader>dg :diffget<CR>
 :nmap <leader>dp :diffput<CR>
 
+" Prettify JSON using python
+:nmap <leader>j :%!python -m json.tool<CR>
+
+" Change case for the current word
+:nmap <leader>U gUiw
+:nmap <leader>u guiw
+
 nnoremap <space> za
 
 " Disable K
 noremap K <NOP>
 
-filetype plugin on
-let g:pydiction_location = '/Users/ian/.vim/after/ftplugin/complete-dict'
+" Kill all trailing whitespace with one keypress!
+:map <F3> :%s/\s\+$//g<cr>
 
+filetype plugin on
+
+" Flake 8
+autocmd BufWritePost *.py call Flake8()
+let g:flake8_max_line_length=99
+" Ignore over-indentation error
+let g:flake8_ignore="E126,F403,E712,E711"

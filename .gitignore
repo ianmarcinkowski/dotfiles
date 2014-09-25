@@ -1,14 +1,16 @@
 custom/zsh
+*un~
+bin/subl
+tags
+.netrwhist
 
 vim/backups
 vim/view
-*un~
 vim/.netrwhist
 vim/tmp
 vim/spell
 vim/after/.vimrc.after
 vim/.vundles.local
+vim/swap/*
+vim/view/*
 vim/bundle
-.netrwhist
-bin/subl
-tags

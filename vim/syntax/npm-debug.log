@@ -1,0 +1,118 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'n' ]
+2 info using npm@1.3.11
+3 info using node@v0.10.18
+4 verbose cache add [ 'n', null ]
+5 verbose cache add name=undefined spec="n" args=["n",null]
+6 verbose parsed url { protocol: null,
+6 verbose parsed url   slashes: null,
+6 verbose parsed url   auth: null,
+6 verbose parsed url   host: null,
+6 verbose parsed url   port: null,
+6 verbose parsed url   hostname: null,
+6 verbose parsed url   hash: null,
+6 verbose parsed url   search: null,
+6 verbose parsed url   query: null,
+6 verbose parsed url   pathname: 'n',
+6 verbose parsed url   path: 'n',
+6 verbose parsed url   href: 'n' }
+7 silly lockFile d1854cae-n n
+8 verbose lock n /home/ian/.npm/d1854cae-n.lock
+9 silly lockFile d1854cae-n n
+10 silly lockFile d1854cae-n n
+11 verbose addNamed [ 'n', '' ]
+12 verbose addNamed [ null, '*' ]
+13 silly lockFile 6b58d7dc-n n@
+14 verbose lock n@ /home/ian/.npm/6b58d7dc-n.lock
+15 silly addNameRange { name: 'n', range: '*', hasData: false }
+16 verbose url raw n
+17 verbose url resolving [ 'https://registry.npmjs.org/', './n' ]
+18 verbose url resolved https://registry.npmjs.org/n
+19 info trying registry request attempt 1 at 12:33:52
+20 verbose etag "8M529F2AT9Y87J65E43JFI614"
+21 http GET https://registry.npmjs.org/n
+22 http 200 https://registry.npmjs.org/n
+23 silly registry.get cb [ 200,
+23 silly registry.get   { date: 'Thu, 20 Feb 2014 17:34:10 GMT',
+23 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B)',
+23 silly registry.get     etag: '"EXMRFWUKB0JJQNMHD5SRKD2AZ"',
+23 silly registry.get     'content-type': 'application/json',
+23 silly registry.get     via: '1.1 varnish',
+23 silly registry.get     'cache-control': 'max-age=1',
+23 silly registry.get     'content-length': '28102',
+23 silly registry.get     'accept-ranges': 'bytes',
+23 silly registry.get     age: '7839',
+23 silly registry.get     'x-served-by': 'cache-v42-ASH, cache-c101-CHI',
+23 silly registry.get     'x-cache': 'HIT, MISS',
+23 silly registry.get     'x-cache-hits': '1, 0',
+23 silly registry.get     'x-timer': 'S1392910460.755006790,VS0,VS8,VE8,VE7189305',
+23 silly registry.get     vary: 'Accept',
+23 silly registry.get     'keep-alive': 'timeout=10, max=50',
+23 silly registry.get     connection: 'Keep-Alive' } ]
+24 silly addNameRange number 2 { name: 'n', range: '*', hasData: true }
+25 silly addNameRange versions [ 'n',
+25 silly addNameRange   [ '0.0.1',
+25 silly addNameRange     '0.0.2',
+25 silly addNameRange     '0.0.3',
+25 silly addNameRange     '0.0.4',
+25 silly addNameRange     '0.1.0',
+25 silly addNameRange     '0.1.1',
+25 silly addNameRange     '0.1.2',
+25 silly addNameRange     '0.2.0',
+25 silly addNameRange     '0.2.1',
+25 silly addNameRange     '0.2.2',
+25 silly addNameRange     '0.3.0',
+25 silly addNameRange     '0.4.0',
+25 silly addNameRange     '0.4.1',
+25 silly addNameRange     '0.4.2',
+25 silly addNameRange     '0.5.0',
+25 silly addNameRange     '0.5.1',
+25 silly addNameRange     '0.5.2',
+25 silly addNameRange     '0.5.3',
+25 silly addNameRange     '0.5.4',
+25 silly addNameRange     '0.6.0',
+25 silly addNameRange     '0.6.1',
+25 silly addNameRange     '0.7.0',
+25 silly addNameRange     '0.7.1',
+25 silly addNameRange     '0.7.2',
+25 silly addNameRange     '0.7.3',
+25 silly addNameRange     '0.8.0',
+25 silly addNameRange     '0.8.1',
+25 silly addNameRange     '0.8.2',
+25 silly addNameRange     '0.9.0',
+25 silly addNameRange     '0.9.1',
+25 silly addNameRange     '0.9.2',
+25 silly addNameRange     '0.9.3',
+25 silly addNameRange     '1.0.0',
+25 silly addNameRange     '1.1.0',
+25 silly addNameRange     '1.2.1' ] ]
+26 verbose addNamed [ 'n', '1.2.1' ]
+27 verbose addNamed [ '1.2.1', '1.2.1' ]
+28 silly lockFile e14a9ed8-n-1-2-1 n@1.2.1
+29 verbose lock n@1.2.1 /home/ian/.npm/e14a9ed8-n-1-2-1.lock
+30 silly lockFile c8852821-registry-npmjs-org-n-n-1-2-1-tgz https://registry.npmjs.org/n/-/n-1.2.1.tgz
+31 verbose lock https://registry.npmjs.org/n/-/n-1.2.1.tgz /home/ian/.npm/c8852821-registry-npmjs-org-n-n-1-2-1-tgz.lock
+32 verbose addRemoteTarball [ 'https://registry.npmjs.org/n/-/n-1.2.1.tgz',
+32 verbose addRemoteTarball   '7cd5c504519943eda2c264f445ed97e4be51a250' ]
+33 silly lockFile c8852821-registry-npmjs-org-n-n-1-2-1-tgz https://registry.npmjs.org/n/-/n-1.2.1.tgz
+34 silly lockFile c8852821-registry-npmjs-org-n-n-1-2-1-tgz https://registry.npmjs.org/n/-/n-1.2.1.tgz
+35 silly lockFile e14a9ed8-n-1-2-1 n@1.2.1
+36 silly lockFile e14a9ed8-n-1-2-1 n@1.2.1
+37 silly lockFile 6b58d7dc-n n@
+38 silly lockFile 6b58d7dc-n n@
+39 error Error: EACCES, mkdir '/home/ian/tmp/npm-29146-HHxRk5oX'
+39 error  { [Error: EACCES, mkdir '/home/ian/tmp/npm-29146-HHxRk5oX']
+39 error   errno: 3,
+39 error   code: 'EACCES',
+39 error   path: '/home/ian/tmp/npm-29146-HHxRk5oX' }
+40 error Please try running this command again as root/Administrator.
+41 error System Linux 3.8.0-35-generic
+42 error command "node" "/usr/local/bin/npm" "install" "n"
+43 error cwd /home/ian/.vim/syntax
+44 error node -v v0.10.18
+45 error npm -v 1.3.11
+46 error path /home/ian/tmp/npm-29146-HHxRk5oX
+47 error code EACCES
+48 error errno 3
+49 error stack Error: EACCES, mkdir '/home/ian/tmp/npm-29146-HHxRk5oX'
+50 verbose exit [ 3, true ]

@@ -3,6 +3,7 @@ custom/zsh
 bin/subl
 tags
 .netrwhist
+.DS_Store
 
 vim/backups
 vim/view

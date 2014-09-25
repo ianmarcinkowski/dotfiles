@@ -21,45 +21,52 @@ unsetopt correct_all
 # Customize to your needs...
 #
 # aliases
-alias la='ls -alG --color=auto'
-alias ls='ls -G --color=auto'
+alias la='ls -al'
 alias ..="cd .."
-alias ..2="cd ../.."
-alias ..3="cd ../../.."
-alias ..4="cd ../../../.."
-alias ..5="cd ../../../../.."
-alias back="cd -"
-alias blog="bzr log | less"
-alias bstat="bzr status"
-alias qdiff='bzr qdiff'
-alias qlog='bzr qlog'
-alias startnginx='sudo /usr/local/nginx/sbin/nginx'
-alias stopnginx='sudo kill `cat /usr/local/nginx/logs/nginx.pid `'
-alias restartnginx='stopnginx; startnginx'
 alias clone='virtualenv-clone'
-alias pydevelop='python setup.py develop'
-alias pyinstall='python setup.py install'
+alias pydevelop='pip install -e .'
+alias pyinstall='pip install .'
 alias grep='grep --color'
-alias psqlplaypen='psql -h playpen.beanfield.com boss_stage'
-alias psqlbss='psql -h bssmowat.beanfield.com boss'
-alias beandev='cd bean.models && pydevelop && cd ../bean.lib && pydevelop && cd ../bean.iptv && pydevelop && cd ../bean && pydevelop'
-alias migrate='migrate.py'
-alias bossmux='~/.tmux/boss'
+alias beandev='cd bean.models && pydevelop && cd ../bean.lib && pydevelop && cd ../bean && pydevelop'
 alias tlist='tmux list-sessions'
-alias tattach='tmux attach-session -t'
-alias tnew='tmux new-session -s'
-alias hswitch='hg update'
-alias therapist='cd ~/code/splintermind-attributes && sudo ~/code/splintermind-attributes/bin/release/DwarfTherapist'
+alias removebuild='~/.local/bin/removebuilddirs.sh'
+alias netisip='finddeviceip.sh 10.219.45.254 8:10'
+alias zhoneip='finddeviceip.sh 10.219.45.254 93:40'
+
+# Use infratools' fabfile.py
+alias infratools="fab -f $HOME/infratools/mainline/fabfile.py"
+# Copy database from staging.beanfield.com/boss_template to localhost/boss_template
+alias refresh_boss_template="infratools db.copy_database:from_host=staging.beanfield.com,from_name=boss_template,to_host=localhost,to_name=boss_template"
+# Copy database from localhost/boss_template to localhost/boss_dev
+alias refresh_boss_dev="infratools db.copy_database:from_host=localhost,from_name=boss_template,to_host=localhost,to_name=boss_dev"
+# Copy database from staging.beanfield.com/boss_template and migrate localhost/boss_dev
+alias refresh_boss_both="refresh_boss_template && refresh_boss_dev && infratools db.migrate"
 
 function up() { local p= i=${1:-1}; while (( i-- )); do p+=../; done; cd "$p$2" && pwd; }
 
 # from bash_profile
-export PATH=/usr/local/postgresql-9.1/bin:~/.local/bin:~/code/Python-2.7.3/Tools/i18n:$PATH
+export PATH=~/.local/bin:~/code/Python-2.7.3/Tools/i18n:$PATH
 export LSCOLORS='cxfxcxdxbxegedabagacad'
 export CLICOLOR_FORCE=1
 export WORKON_HOME=$HOME/.virtualenvs
 source /etc/bash_completion.d/virtualenvwrapper
 export GREP_COLOR=1
+export PAGER=less
+export PATH=/opt/android-sdk/sdk/platform-tools:$PATH
+
+# If no SSH agent is already running, start one now. Re-use sockets so we never
+# have to start more than one session.
+export SSH_AUTH_SOCK=$HOME/.run/.ssh-auth-socket
+ssh-add -l >/dev/null 2>&1
+if [ $? = 2 ]; then
+   # No ssh-agent running
+   rm -rf $SSH_AUTH_SOCK
+   # >| allows output redirection to over-write files if no clobber is set
+   ssh-agent -t 36000 -a $SSH_AUTH_SOCK >| /tmp/.ssh-script
+   source /tmp/.ssh-script
+   echo $SSH_AGENT_PID >| $HOME/.run/.ssh-agent-pid
+   rm /tmp/.ssh-script
+fi
 
 # auto-completion:
 autoload -U compinit

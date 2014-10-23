@@ -3,7 +3,6 @@ function prompt_char {
     git branch >/dev/null 2>/dev/null && echo '±' && return
     hg root >/dev/null 2>/dev/null && echo '☿' && return
     svn info >/dev/null 2>/dev/null && echo '⚡' && return
-    echo '○'
 }
 
 function hg_prompt_info {
@@ -15,7 +14,7 @@ patches: <patches|join( → )|pre_applied(%{$fg[yellow]%})|post_applied(%{$reset
 }
 
 PROMPT='%{$fg_bold[red]%}%n%{$reset_color%}@%{$fg_bold[blue]%}%m %{$fg_bold[white]%}%~%{$reset_color%}$(hg_prompt_info)$(git_prompt_info)
-%{$fg_bold[green]%}:%# %{$reset_color%}'
+%{$fg_bold[green]%}$(prompt_char):%# %{$reset_color%}'
 
 ZSH_THEME_GIT_PROMPT_PREFIX=" on %{$fg[green]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"

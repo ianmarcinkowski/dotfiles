@@ -1,11 +1,38 @@
 #!/bin/sh
 
 # Directories
-mkdir -p ~/.local/bin
-mkdir ~/.run
-mkdir ~/.vim
-mkdir ~/.zsh
+if [ ! -e ~/.local/bin ]
+then
+    mkdir -p ~/.local/bin
+fi
 
+if [ ! -e ~/.run ]
+then
+    mkdir -p ~/.run
+fi
+
+if [ ! -e ~/.vim ]
+then
+    mkdir -p ~/.vim
+fi
+
+if [ ! -e ~/.zsh ]
+then
+    mkdir -p ~/.zsh
+fi
+
+# Grap repos
+if [ ! -e ~/code/hg-prompt/prompt.py ]
+then
+    cd ~/code
+    hg clone https://bitbucket.org/sjl/hg-prompt
+fi
+
+if [ ! -e ~/.oh-my-zsh ]
+then
+    cd ~
+    git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+fi
 
 cp zshrc ~/.zshrc
 cp vimrc ~/.vimrc

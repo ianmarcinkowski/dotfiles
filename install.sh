@@ -34,6 +34,8 @@ then
     git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 fi
 
+# install configs from dotfiles repo
+cd ~/code/dotfiles
 cp zshrc ~/.zshrc
 cp vimrc ~/.vimrc
 cp tmux.conf ~/.tmux.conf

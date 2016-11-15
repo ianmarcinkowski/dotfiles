@@ -18,55 +18,74 @@ source $ZSH/oh-my-zsh.sh
 # CUSTOM turn autocorrect off
 unsetopt correct_all
 
-# Customize to your needs...
-#
-# aliases
-alias la='ls -al'
-alias ..="cd .."
-alias clone='virtualenv-clone'
-alias pydevelop='pip install -e .'
-alias pyinstall='pip install .'
-alias grep='grep --color'
-alias beandev='cd bean.models && pydevelop && cd ../bean.lib && pydevelop && cd ../bean && pydevelop'
-alias tlist='tmux list-sessions'
-alias removebuild='~/.local/bin/removebuilddirs.sh'
-alias netisip='finddeviceip.sh 10.219.45.254 8:10'
-alias zhoneip='finddeviceip.sh 10.219.45.254 93:40'
-
-# Use infratools' fabfile.py
-alias infratools="fab -f $HOME/infratools/mainline/fabfile.py"
-# Copy database from staging.beanfield.com/boss_template to localhost/boss_template
-alias refresh_boss_template="infratools db.copy_database:from_host=staging.beanfield.com,from_name=boss_template,to_host=localhost,to_name=boss_template"
-# Copy database from localhost/boss_template to localhost/boss_dev
-alias refresh_boss_dev="infratools db.copy_database:from_host=localhost,from_name=boss_template,to_host=localhost,to_name=boss_dev"
-# Copy database from staging.beanfield.com/boss_template and migrate localhost/boss_dev
-alias refresh_boss_both="refresh_boss_template && refresh_boss_dev && infratools db.migrate"
-
-function up() { local p= i=${1:-1}; while (( i-- )); do p+=../; done; cd "$p$2" && pwd; }
-
 # from bash_profile
-export PATH=~/.local/bin:~/code/Python-2.7.3/Tools/i18n:$PATH
+export PATH=/usr/local/postgresql-9.1/bin:~/.local/bin:~/code/Python-2.7.3/Tools/i18n:$PATH
 export LSCOLORS='cxfxcxdxbxegedabagacad'
 export CLICOLOR_FORCE=1
 export WORKON_HOME=$HOME/.virtualenvs
 source /etc/bash_completion.d/virtualenvwrapper
 export GREP_COLOR=1
-export PAGER=less
-export PATH=/opt/android-sdk/sdk/platform-tools:$PATH
+export VIMDIR=$HOME/.vim
 
-# If no SSH agent is already running, start one now. Re-use sockets so we never
-# have to start more than one session.
-export SSH_AUTH_SOCK=$HOME/.run/.ssh-auth-socket
-ssh-add -l >/dev/null 2>&1
-if [ $? = 2 ]; then
-   # No ssh-agent running
-   rm -rf $SSH_AUTH_SOCK
-   # >| allows output redirection to over-write files if no clobber is set
-   ssh-agent -t 36000 -a $SSH_AUTH_SOCK >| /tmp/.ssh-script
-   source /tmp/.ssh-script
-   echo $SSH_AGENT_PID >| $HOME/.run/.ssh-agent-pid
-   rm /tmp/.ssh-script
-fi
+# NVM for Node/NPM
+export NVM_DIR="/home/ian/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# Docker
+export DOCKER_OPTS="--dns 10.12.0.25 --dns 8.8.8.8"
+
+# Fuzzy search
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# rbenv
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+# aliases
+alias la='ls -al --color=auto'
+alias ls='ls --color=auto'
+alias ..="cd .."
+alias ..2="cd ../.."
+alias ..3="cd ../../.."
+alias ..4="cd ../../../.."
+alias ..5="cd ../../../../.."
+alias back="cd -"
+alias blog="bzr log | less"
+alias bstat="bzr status"
+alias qdiff='bzr qdiff'
+alias qlog='bzr qlog'
+alias startnginx='sudo /usr/local/nginx/sbin/nginx'
+alias stopnginx='sudo kill `cat /usr/local/nginx/logs/nginx.pid `'
+alias restartnginx='stopnginx; startnginx'
+alias clone='virtualenv-clone'
+alias pydevelop='python setup.py develop'
+alias pyinstall='python setup.py install'
+alias grep='grep --color'
+alias beandev='cd bean.models && pydevelop && cd ../bean.lib && pydevelop && cd ../bean.iptv && pydevelop && cd ../bean && pydevelop'
+alias migrate='migrate.py'
+alias tlist='tmux list-sessions'
+alias tattach='tmux attach-session -t'
+alias tnew='tmux new-session -s'
+alias vimrc='vim $VIMDIR/vimrc'
+alias ra='ranger'
+alias docker-stop-all='docker stop $(docker ps -a -q)'
+alias docker-rm-all='docker rm $(docker ps -a -q)'
+alias docker-rmi-all='docker rmi $(docker images -q)'
+alias docker-cleanup='docker rm $(docker ps -a -f "name=_run_" -q) && docker rmi $(docker images -q)'
+
+
+# Gunicorn commands
+alias cardicorn='gunicorn -c gunicorn.conf.py -t 9999 --debug cardapp.wsgi:app --reload'
+
+# Docker aliases
+dockip() {
+      docker inspect --format '{{ .NetworkSettings.IPAddress }}' "$@"
+  }
+
+function up() { local p= i=${1:-1}; while (( i-- )); do p+=../; done; cd "$p$2" && pwd; }
+function mdk() { docker kill $1; docker rm $1; }
 
 # auto-completion:
 autoload -U compinit
@@ -167,3 +186,5 @@ bindkey '^R' history-incremental-search-backward
 HISTSIZE=10000
 SAVEHIST=10000
 
+# Make RVM not suck
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 

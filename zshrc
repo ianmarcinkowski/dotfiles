@@ -75,14 +75,19 @@ alias docker-rm-all='docker rm $(docker ps -a -q)'
 alias docker-rmi-all='docker rmi $(docker images -q)'
 alias docker-cleanup='docker rm $(docker ps -a -f "name=_run_" -q) && docker rmi $(docker images -q)'
 
+# Docker commands
+function dockerservice() {
+    cd ~/server_apps
+    docker-compose -f docker-compose.yml -f "$1".yml run -e PURPOSE=srv --rm --name "$1" "$1" bash
+}
 
 # Gunicorn commands
 alias cardicorn='gunicorn -c gunicorn.conf.py -t 9999 --debug cardapp.wsgi:app --reload'
 
 # Docker aliases
 dockip() {
-      docker inspect --format '{{ .NetworkSettings.IPAddress }}' "$@"
-  }
+    docker inspect --format '{{ .NetworkSettings.IPAddress }}' "$@"
+}
 
 function up() { local p= i=${1:-1}; while (( i-- )); do p+=../; done; cd "$p$2" && pwd; }
 function mdk() { docker kill $1; docker rm $1; }

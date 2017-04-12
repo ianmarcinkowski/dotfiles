@@ -22,6 +22,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-surround'
 Plug 'aquach/vim-http-client'
 Plug 'rking/ag.vim'
+Plug 'ap/vim-buftabline'
 
 " HTML autocompletion
 Plug 'mattn/emmet-vim'
@@ -60,6 +61,7 @@ call plug#end()
 
 " 2: moving around, searching and patterns {{{
 set hlsearch
+set ignorecase
 " }}}
 
 " 3: tags {{{
@@ -237,6 +239,11 @@ let g:multi_cursor_quit_key='<Esc>'
 
 " :Ag leader mapping
 :nmap <leader>a :Ag<CR>
+
+" :buftabline navigation
+set hidden
+nnoremap <leader>l :bnext<CR>
+nnoremap <leader>h :bprev<CR>
 
 " }}}
 

@@ -11,7 +11,7 @@ ZSH_THEME="ianmarcinkowski"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git mercurial)
+plugins=(git ssh-agent)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -74,6 +74,9 @@ alias docker-stop-all='docker stop $(docker ps -a -q)'
 alias docker-rm-all='docker rm $(docker ps -a -q)'
 alias docker-rmi-all='docker rmi $(docker images -q)'
 alias docker-cleanup='docker rm $(docker ps -a -f "name=_run_" -q) && docker rmi $(docker images -q)'
+alias dc='docker-compose'
+alias emberdev='ember server --port 4200 --proxy https://my.dev.freshenv.com --insecure-proxy true'
+alias emberrc='ember server --port 4200 --proxy https://my.rc.freshenv.com --insecure-proxy true'
 
 # Docker commands
 function dockerservice() {

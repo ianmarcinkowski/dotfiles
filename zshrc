@@ -11,7 +11,7 @@ ZSH_THEME="ianmarcinkowski"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ssh-agent)
+plugins=(git ssh-agent wd vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -26,6 +26,7 @@ export WORKON_HOME=$HOME/.virtualenvs
 source /etc/bash_completion.d/virtualenvwrapper
 export GREP_COLOR=1
 export VIMDIR=$HOME/.vim
+export SERVER_APPS=~/projects/server_apps
 
 # NVM for Node/NPM
 export NVM_DIR="/home/ian/.nvm"
@@ -99,7 +100,7 @@ function mdk() { docker kill $1; docker rm $1; }
 autoload -U compinit
 compinit
 _force_rehash() { (( CURRENT == 1 )) && rehash ; return 1 }
-zstyle ':completion:::::' completer _force_rehash _expand _complete _approximate 
+zstyle ':completion:::::' completer _force_rehash _expand _complete _approximate
 zstyle ':completion:*:descriptions' format "- %d -"
 zstyle ':completion:*:default' list-prompt '%S%M matches%s'
 zstyle ':completion:*:manuals' separate-sections true
@@ -182,8 +183,8 @@ fi
 # keybindings (defined AFTER scripts):
 bindkey "^[[2~" overwrite-mode
 bindkey "^[[3~" delete-char
-bindkey "^[[5~" up-line-or-search 
-bindkey "^[[6~" down-line-or-search 
+bindkey "^[[5~" up-line-or-search
+bindkey "^[[6~" down-line-or-search
 bindkey "^[[1~" beginning-of-line
 bindkey "^[[7~" beginning-of-line
 bindkey "^[[4~" end-of-line
@@ -194,5 +195,36 @@ bindkey '^R' history-incremental-search-backward
 HISTSIZE=10000
 SAVEHIST=10000
 
-# Make RVM not suck
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
+# Lazy load all the commands for rvm and nvm (rvm irb rake rails gem bundle pod) (nvm node npm)
+# Yoinked from https://gist.github.com/QinMing/364774610afc0e06cc223b467abe83c0
+lazy_load() {
+    echo "Lazy loading $1 ..."
+    local -a names
+    if [[ -n "$ZSH_VERSION" ]]; then
+        names=("${(@s: :)${1}}")
+    else
+        names=($1)
+    fi
+    unalias "${names[@]}"
+    . $2
+    shift 2
+    $*
+}
+group_lazy_load() {
+    local script
+    script=$1
+    shift 1
+    for cmd in "$@"; do
+        alias $cmd="lazy_load \"$*\" $script $cmd"
+    done
+}
+# rvm
+# [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+export PATH="$PATH:$HOME/.rvm/bin"
+group_lazy_load $HOME/.rvm/scripts/rvm rvm irb rake rails gem bundle pod
+# nvm
+export NVM_DIR=~/.nvm
+group_lazy_load $HOME/.nvm/nvm.sh nvm node npm
+
+# EC2 ssh key
+eval "$(ssh-add ~/.ssh/ecs.id_rsa)"

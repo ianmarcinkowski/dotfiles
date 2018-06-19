@@ -76,8 +76,7 @@ alias docker-rm-all='docker rm $(docker ps -a -q)'
 alias docker-rmi-all='docker rmi $(docker images -q)'
 alias docker-cleanup='docker rm $(docker ps -a -f "name=_run_" -q) && docker rmi $(docker images -q)'
 alias dc='docker-compose'
-alias emberdev='ember server --port 4200 --proxy https://my.dev.freshenv.com --insecure-proxy true'
-alias emberrc='ember server --port 4200 --proxy https://my.rc.freshenv.com --insecure-proxy true'
+alias ember='./node_modules/ember-cli/bin/ember'
 
 # Docker commands
 function dockerservice() {

@@ -23,7 +23,6 @@ export PATH=/usr/local/postgresql-9.1/bin:~/.local/bin:~/code/Python-2.7.3/Tools
 export LSCOLORS='cxfxcxdxbxegedabagacad'
 export CLICOLOR_FORCE=1
 export WORKON_HOME=$HOME/.virtualenvs
-source /etc/bash_completion.d/virtualenvwrapper
 export GREP_COLOR=1
 export VIMDIR=$HOME/.vim
 export SERVER_APPS=~/projects/server_apps
@@ -31,9 +30,6 @@ export SERVER_APPS=~/projects/server_apps
 # NVM for Node/NPM
 export NVM_DIR="/home/ian/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
-# Docker
-export DOCKER_OPTS="--dns 10.12.0.25 --dns 8.8.8.8"
 
 # Fuzzy search
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -64,11 +60,9 @@ alias clone='virtualenv-clone'
 alias pydevelop='python setup.py develop'
 alias pyinstall='python setup.py install'
 alias grep='grep --color'
-alias beandev='cd bean.models && pydevelop && cd ../bean.lib && pydevelop && cd ../bean.iptv && pydevelop && cd ../bean && pydevelop'
 alias migrate='migrate.py'
 alias tlist='tmux list-sessions'
-alias tattach='tmux attach-session -t'
-alias tnew='tmux new-session -s'
+alias tsession='tmux attach-session -t $1 || tmux new-session -t $2'
 alias vimrc='vim $VIMDIR/vimrc'
 alias ra='ranger'
 alias docker-stop-all='docker stop $(docker ps -a -q)'

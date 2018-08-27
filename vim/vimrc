@@ -370,6 +370,10 @@ if has("autocmd")
         autocmd FileType gitcommit setlocal cursorline
     augroup END
 
+    augroup ruby_files
+        autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2 noautoindent
+    augroup END
+
 endif "}}}
 " }}}
 
@@ -552,4 +556,8 @@ let g:lightline = {
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 
+" }}}
+
+" 29: external configuration {{{1
+source ~/.vim/external.vimrc
 " }}}

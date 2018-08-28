@@ -1,6 +1,8 @@
 # Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
-ZDOTDIR="${HOME}/zsh"
+ZSH=$HOME/.zsh
+OHMYZSH_HOME=$HOME/.oh-my-zsh
+
+source $ZSH/0000_before.zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -13,73 +15,21 @@ ZSH_THEME="ianmarcinkowski"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git ssh-agent wd vi-mode)
 
-source $ZSH/oh-my-zsh.sh
+source $OHMYZSH/oh-my-zsh.sh
 
-# CUSTOM turn autocorrect off
+# turn autocorrect off
 unsetopt correct_all
-
-# from bash_profile
-export PATH=/usr/local/postgresql-9.1/bin:~/.local/bin:~/code/Python-2.7.3/Tools/i18n:$PATH
-export LSCOLORS='cxfxcxdxbxegedabagacad'
-export CLICOLOR_FORCE=1
-export WORKON_HOME=$HOME/.virtualenvs
-export GREP_COLOR=1
-export VIMDIR=$HOME/.vim
-export SERVER_APPS=~/projects/server_apps
-
-# NVM for Node/NPM
-export NVM_DIR="/home/ian/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # Fuzzy search
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='ag -g ""'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-# rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-
-# aliases
-alias la='ls -al --color=auto'
-alias ls='ls --color=auto'
-alias ..="cd .."
-alias ..2="cd ../.."
-alias ..3="cd ../../.."
-alias ..4="cd ../../../.."
-alias ..5="cd ../../../../.."
-alias back="cd -"
-alias blog="bzr log | less"
-alias bstat="bzr status"
-alias qdiff='bzr qdiff'
-alias qlog='bzr qlog'
-alias startnginx='sudo /usr/local/nginx/sbin/nginx'
-alias stopnginx='sudo kill `cat /usr/local/nginx/logs/nginx.pid `'
-alias restartnginx='stopnginx; startnginx'
-alias clone='virtualenv-clone'
-alias pydevelop='python setup.py develop'
-alias pyinstall='python setup.py install'
-alias grep='grep --color'
-alias migrate='migrate.py'
-alias tlist='tmux list-sessions'
-alias tsession='tmux attach-session -t $1 || tmux new-session -t $2'
-alias vimrc='vim $VIMDIR/vimrc'
-alias ra='ranger'
-alias docker-stop-all='docker stop $(docker ps -a -q)'
-alias docker-rm-all='docker rm $(docker ps -a -q)'
-alias docker-rmi-all='docker rmi $(docker images -q)'
-alias docker-cleanup='docker rm $(docker ps -a -f "name=_run_" -q) && docker rmi $(docker images -q)'
-alias dc='docker-compose'
-alias ember='./node_modules/ember-cli/bin/ember'
-
 # Docker commands
 function dockerservice() {
     cd ~/server_apps
     docker-compose -f docker-compose.yml -f "$1".yml run -e PURPOSE=srv --rm --name "$1" "$1" bash
 }
-
-# Gunicorn commands
-alias cardicorn='gunicorn -c gunicorn.conf.py -t 9999 --debug cardapp.wsgi:app --reload'
 
 # Docker aliases
 dockip() {
@@ -173,18 +123,6 @@ if [[ -f /usr/share/zsh/plugins/zsh-history-substring-search/history-substring-s
   HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS='i'
 fi
 
-# keybindings (defined AFTER scripts):
-bindkey "^[[2~" overwrite-mode
-bindkey "^[[3~" delete-char
-bindkey "^[[5~" up-line-or-search
-bindkey "^[[6~" down-line-or-search
-bindkey "^[[1~" beginning-of-line
-bindkey "^[[7~" beginning-of-line
-bindkey "^[[4~" end-of-line
-bindkey "^[[8~" end-of-line
-bindkey "^?" backward-delete-char
-bindkey '^R' history-incremental-search-backward
-
 HISTSIZE=10000
 SAVEHIST=10000
 
@@ -203,6 +141,7 @@ lazy_load() {
     shift 2
     $*
 }
+
 group_lazy_load() {
     local script
     script=$1
@@ -211,13 +150,5 @@ group_lazy_load() {
         alias $cmd="lazy_load \"$*\" $script $cmd"
     done
 }
-# rvm
-# [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-export PATH="$PATH:$HOME/.rvm/bin"
-group_lazy_load $HOME/.rvm/scripts/rvm rvm irb rake rails gem bundle pod
-# nvm
-export NVM_DIR=~/.nvm
-group_lazy_load $HOME/.nvm/nvm.sh nvm node npm
 
-# EC2 ssh key
-eval "$(ssh-add ~/.ssh/ecs.id_rsa)"
+source $ZSH/zzzz_after.zsh

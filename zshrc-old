@@ -36,10 +36,6 @@ export NVM_DIR="/home/ian/.nvm"
 export FZF_DEFAULT_COMMAND='ag -g ""'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-# rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-
 # aliases
 alias la='ls -al'
 alias ls='ls -G'
@@ -50,9 +46,6 @@ alias ..4="cd ../../../.."
 alias ..5="cd ../../../../.."
 alias back="cd -"
 alias blog="bzr log | less"
-alias bstat="bzr status"
-alias qdiff='bzr qdiff'
-alias qlog='bzr qlog'
 alias startnginx='sudo /usr/local/nginx/sbin/nginx'
 alias stopnginx='sudo kill `cat /usr/local/nginx/logs/nginx.pid `'
 alias restartnginx='stopnginx; startnginx'
@@ -71,6 +64,11 @@ alias docker-rmi-all='docker rmi $(docker images -q)'
 alias docker-cleanup='docker rm $(docker ps -a -f "name=_run_" -q) && docker rmi $(docker images -q)'
 alias dc='docker-compose'
 alias ember='./node_modules/ember-cli/bin/ember'
+
+alias diffsf='diff-so-fancy'
+alias fr='kill_processes_listening_on 3000; kill_processes_listening_on 5555; pkill nginx; pkill unicorn; foreman start'
+alias frkill='kill_processes_listening_on 3000; kill_processes_listening_on 5555; pkill nginx; pkill unicorn;'
+function kill_processes_listening_on() { lsof -i:$1 -t | xargs kill; }
 
 # Docker commands
 function dockerservice() {
@@ -203,6 +201,7 @@ lazy_load() {
     shift 2
     $*
 }
+
 group_lazy_load() {
     local script
     script=$1
@@ -212,14 +211,17 @@ group_lazy_load() {
     done
 }
 
+# gettext
+export PATH="/usr/local/opt/gettext/bin:$PATH"
+
 # nvm
 export NVM_DIR=~/.nvm
 group_lazy_load $HOME/.nvm/nvm.sh nvm node npm
 
-# rvm
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-group_lazy_load $HOME/.rvm/scripts/rvm rvm irb rake rails gem bundle pod
-export PATH="$PATH:$HOME/.rvm/bin"
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+group_lazy_load $HOME/.rvm/scripts/rvm rvm irb rake rails gem bundle
+
+unset -f group_lazy_load
 
 # direnv
 eval "$(direnv hook zsh)"
@@ -229,10 +231,10 @@ wd() {
   . /Users/ianm/bin/wd/wd.sh
 }
 
-# gettext
-export PATH="/usr/local/opt/gettext/bin:$PATH"
-
 # Rails editor
 export RAILS_FOOTNOTES_EDITOR=vim
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES # OSX fork thing
 
-export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+# Set Spaceship ZSH as a prompt
+# autoload -U promptinit; promptinit
+# prompt spaceship

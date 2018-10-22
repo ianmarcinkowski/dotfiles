@@ -23,6 +23,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-dispatch'
 "Plug 'w0rp/ale'
 
 " HTML autocompletion
@@ -39,6 +40,9 @@ Plug 'junegunn/fzf.vim'
 
 " mutlicursor
 Plug 'terryma/vim-multiple-cursors'
+
+" Ruby
+Plug 'tpope/vim-rails'
 
 " file types
 Plug 'ap/vim-css-color'
@@ -299,11 +303,6 @@ if has("autocmd")
         autocmd FileType php,html.twig setlocal cc=100,120 tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
     augroup END
 
-    augroup cucumber_files
-        autocmd FileType cucumber setlocal shiftwidth=2 softtabstop=2 noautoindent
-        autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2 noautoindent
-    augroup END
-
     augroup keyword
         autocmd FileType html,css,javascript setlocal iskeyword+=-
     augroup END
@@ -371,7 +370,9 @@ if has("autocmd")
     augroup END
 
     augroup ruby_files
+        autocmd FileType cucumber setlocal shiftwidth=2 softtabstop=2 noautoindent
         autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2 noautoindent
+        autocmd FileType eruby setlocal shiftwidth=2 softtabstop=2 noautoindent
     augroup END
 
 endif "}}}

@@ -210,7 +210,7 @@ unset -f group_lazy_load
 
 # wd plugin
 wd() {
-  . /Users/ianm/bin/wd/wd.sh
+  source ~/.local/bin/wd/wd.sh
 }
 
 # Rails editor

@@ -11,7 +11,7 @@ ZSH_THEME="ianmarcinkowski"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ssh-agent wd vi-mode)
+plugins=(ssh-agent git wd vi-mode nulogy)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -19,7 +19,6 @@ source $ZSH/oh-my-zsh.sh
 unsetopt correct_all
 
 # from bash_profile
-export PATH=/usr/local/postgresql-9.1/bin:~/.local/bin:~/code/Python-2.7.3/Tools/i18n:$PATH
 export LSCOLORS='cxfxcxdxbxegedabagacad'
 export CLICOLOR_FORCE=1
 export WORKON_HOME=$HOME/.virtualenvs
@@ -29,12 +28,13 @@ export SERVER_APPS=~/projects/server_apps
 
 # Fuzzy search
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -l -g ""'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # aliases
+alias mkdir='mkdir -p'
+alias ls='ls -G --color'
 alias la='ls -al'
-alias ls='ls -G'
 alias ..="cd .."
 alias ..2="cd ../.."
 alias ..3="cd ../../.."
@@ -60,11 +60,16 @@ alias docker-rmi-all='docker rmi $(docker images -q)'
 alias docker-cleanup='docker rm $(docker ps -a -f "name=_run_" -q) && docker rmi $(docker images -q)'
 alias dc='docker-compose'
 alias ember='./node_modules/ember-cli/bin/ember'
+alias pmcreateuser='rake "nulogy:user_management:create_admin[ianm+dev@nulogy.com,Password1]"'
+alias pmdbfiiiiiiiix='rake db:drop:all && rake db:create:all && rake db:schema:load && rake db:seed'
 
 alias diffsf='diff-so-fancy'
 alias fr='kill_processes_listening_on 3000; kill_processes_listening_on 5555; pkill nginx; pkill unicorn; foreman start'
 alias frkill='kill_processes_listening_on 3000; kill_processes_listening_on 5555; pkill nginx; pkill unicorn;'
 function kill_processes_listening_on() { lsof -i:$1 -t | xargs kill; }
+
+# python stuff
+alias pip=pip3
 
 # Docker commands
 function dockerservice() {

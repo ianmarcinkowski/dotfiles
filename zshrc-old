@@ -171,42 +171,17 @@ bindkey "^[[8~" end-of-line
 HISTSIZE=10000
 SAVEHIST=10000
 
-# Lazy load all the commands for rvm and nvm (rvm irb rake rails gem bundle pod) (nvm node npm)
-# Yoinked from https://gist.github.com/QinMing/364774610afc0e06cc223b467abe83c0
-lazy_load() {
-    echo "Lazy loading $1 ..."
-    local -a names
-    if [[ -n "$ZSH_VERSION" ]]; then
-        names=("${(@s: :)${1}}")
-    else
-        names=($1)
-    fi
-    unalias "${names[@]}"
-    . $2
-    shift 2
-    $*
-}
-
-group_lazy_load() {
-    local script
-    script=$1
-    shift 1
-    for cmd in "$@"; do
-        alias $cmd="lazy_load \"$*\" $script $cmd"
-    done
-}
-
 # gettext
 export PATH="/usr/local/opt/gettext/bin:$PATH"
 
 # nvm
-export NVM_DIR=~/.nvm
-group_lazy_load $HOME/.nvm/nvm.sh nvm node npm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-group_lazy_load $HOME/.rvm/scripts/rvm rvm irb rake rails gem bundle
-
-unset -f group_lazy_load
+# RBenv
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
 
 # wd plugin
 wd() {

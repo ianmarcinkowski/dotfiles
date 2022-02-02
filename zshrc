@@ -1,23 +1,18 @@
 # Path to your oh-my-zsh configuration.
-ZSH_HOME=$HOME/.zsh
 ZSH=$HOME/.oh-my-zsh
-
-source $ZSH_HOME/0000_before.zsh
-
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
 ZSH_THEME="ianmarcinkowski"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ssh-agent wd vi-mode)
-
+plugins=(git ssh-agent fzf-zsh-plugin wd)
 source $ZSH/oh-my-zsh.sh
 
-# turn autocorrect off
+# User configuration
+source $HOME/.zsh/path.zsh
+source $HOME/.zsh/envvars.zsh
+source $HOME/.zsh/aliases.zsh
+# source $HOME/.zsh/auto-completion-config.zsh
+source $HOME/.zsh/fzf-config.zsh
+source $HOME/.zsh/key-bindings.zsh
+source $HOME/.zsh/functions.zsh
+
 unsetopt correct_all
 
 # Docker commands
@@ -35,5 +30,3 @@ fi
 
 HISTSIZE=10000
 SAVEHIST=10000
-
-source $ZSH_HOME/zzzz_after.zsh

@@ -15,6 +15,7 @@ vim/.vundles.local
 vim/swap/*
 vim/view/*
 vim/bundle
+vim/plugged/*
 
 neovim/shada
 neovim/swap

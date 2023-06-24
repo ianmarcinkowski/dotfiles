@@ -1,47 +1,19 @@
 #!/bin/sh
 
-# Directories
-if [ ! -e ~/.local/bin ]
+# Directories E.g.
+# if [ ! -e ~/.local/bin ]
+# then
+#     mkdir -p ~/.local/bin
+# fi
+
+ln -s $PWD/tmux.conf ~/.tmux.conf
+ln -s $PWD/zsh ~/.zsh
+ln -s $PWD/zshrc ~/.zshrc
+ln -s $PWD/vim ~/.vim
+
+if [ ! -e ~/.oh-my-zsh/custom/themes ]
 then
-    mkdir -p ~/.local/bin
+    mkdir -p ~/.oh-my-zsh/custom/themes
 fi
 
-if [ ! -e ~/.run ]
-then
-    mkdir -p ~/.run
-fi
-
-if [ ! -e ~/.vim ]
-then
-    mkdir -p ~/.vim
-fi
-
-if [ ! -e ~/.zsh ]
-then
-    mkdir -p ~/.zsh
-fi
-
-# Grap repos
-if [ ! -e ~/code/hg-prompt/prompt.py ]
-then
-    cd ~/code
-    hg clone https://bitbucket.org/sjl/hg-prompt
-fi
-
-if [ ! -e ~/.oh-my-zsh ]
-then
-    cd ~
-    git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-fi
-
-# install configs from dotfiles repo
-cd ~/code/dotfiles
-cp zshrc ~/.zshrc
-cp vimrc ~/.vimrc
-cp tmux.conf ~/.tmux.conf
-cp oh-my-zsh/ianmarcinkowski.zsh-theme ~/.oh-my-zsh/themes/
-cp local-bin/* ~/.local/bin/
-cp -r vim/* ~/.vim/
-cp -r zsh/* ~/.zsh/
-cp git/gitignore ~/.gitignore
-cp hgrc ~/.hgrc
+cp oh-my-zsh/ianmarcinkowski.zsh-theme ~/.oh-my-zsh/custom/themes/

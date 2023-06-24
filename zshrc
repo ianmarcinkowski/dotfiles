@@ -1,7 +1,7 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="ianmarcinkowski"
-plugins=(git ssh-agent fzf-zsh-plugin wd)
+plugins=(git ssh-agent wd)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -9,7 +9,6 @@ source $HOME/.zsh/path.zsh
 source $HOME/.zsh/envvars.zsh
 source $HOME/.zsh/aliases.zsh
 # source $HOME/.zsh/auto-completion-config.zsh
-source $HOME/.zsh/fzf-config.zsh
 source $HOME/.zsh/key-bindings.zsh
 source $HOME/.zsh/functions.zsh
 
@@ -30,3 +29,24 @@ fi
 
 HISTSIZE=10000
 SAVEHIST=10000
+source $HOME/.zsh/fzf-config.zsh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+# __conda_setup="$('/home/ian/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/home/ian/anaconda3/etc/profile.d/conda.sh" ]; then
+#         . "/home/ian/anaconda3/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/home/ian/anaconda3/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
+# # <<< conda initialize <<<
+# 

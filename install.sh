@@ -17,3 +17,6 @@ then
 fi
 
 cp oh-my-zsh/ianmarcinkowski.zsh-theme ~/.oh-my-zsh/custom/themes/
+
+# TODO
+# fzf, fdfind, silversearcher

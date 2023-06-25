@@ -1,7 +1,7 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="ianmarcinkowski"
-plugins=(git ssh-agent wd)
+plugins=(git fzf ssh-agent wd)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -49,4 +49,4 @@ export NVM_DIR="$HOME/.nvm"
 # fi
 # unset __conda_setup
 # # <<< conda initialize <<<
-# 
+#

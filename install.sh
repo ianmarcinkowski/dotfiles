@@ -11,12 +11,8 @@ ln -s $PWD/zsh ~/.zsh
 ln -s $PWD/zshrc ~/.zshrc
 ln -s $PWD/vim ~/.vim
 
-if [ ! -e ~/.oh-my-zsh/custom/themes ]
-then
-    mkdir -p ~/.oh-my-zsh/custom/themes
-fi
-
-cp oh-my-zsh/ianmarcinkowski.zsh-theme ~/.oh-my-zsh/custom/themes/
+cp -r oh-my-zsh/custom/* ~/.oh-my-zsh/custom/
 
 # TODO
 # fzf, fdfind, silversearcher
+echo "Install fzf, fdfind, silversearcher-ag"

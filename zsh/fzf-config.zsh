@@ -1,6 +1,7 @@
 # FZF installed from Ubuntu apt in 22.04
 [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
 
+# Commented probably because we have the omz plugin enabled
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export FZF_DEFAULT_COMMAND='fd --type f'

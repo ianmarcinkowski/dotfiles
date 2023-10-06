@@ -1,9 +1,4 @@
-# nvm
-export NVM_DIR=~/.nvm
-group_lazy_load $HOME/.nvm/nvm.sh nvm node npm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# rvm
-# Basic usage: [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-# With lazy loading
-export PATH="$PATH:$HOME/.rvm/bin"
-group_lazy_load $HOME/.rvm/scripts/rvm rvm irb rake rails gem bundle pod

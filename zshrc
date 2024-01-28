@@ -1,7 +1,7 @@
 # Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
+plugins=(git fzf ssh-agent rbenv wd)
+export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="ianmarcinkowski"
-plugins=(git fzf ssh-agent wd rbenv asdf)
 source $ZSH/oh-my-zsh.sh
 
 HISTSIZE=10000
@@ -20,6 +20,6 @@ source $HOME/.zsh/framebuffer-colours.zsh
 source $HOME/.zsh/fzf-config.zsh
 source $HOME/.zsh/brew.zsh
 
-for file in ~/$HOME/.zsh/work/*; do
+for file in $HOME/.zsh/work/*(.); do
     source "$file"
 done

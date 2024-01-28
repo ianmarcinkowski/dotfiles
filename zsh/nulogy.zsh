@@ -8,8 +8,3 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 # direnv
 eval "$(direnv hook zsh)"
-
-# wd plugin
-wd() {
-  . /Users/ianm/bin/wd/wd.sh
-}

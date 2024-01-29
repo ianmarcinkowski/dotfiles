@@ -26,16 +26,13 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-dispatch'
 "Plug 'w0rp/ale'
 
-" HTML autocompletion
-Plug 'mattn/emmet-vim'
-
 " CTRLP
 " Plug 'ctrlpvim/ctrlp.vim'
 " Plug 'FelikZ/ctrlp-py-matcher'
 " Plug 'sgur/ctrlp-extensions.vim'
 
 " FZF
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " mutlicursor

@@ -503,6 +503,7 @@ let g:fzf_commands_expect = 'alt-enter,ctrl-x'
 " Advanced customization using autoload functions
 " inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
 
+nnoremap <silent> <leader>p :Files<CR>
 nnoremap <silent> <leader>a :Ag<CR>
 nnoremap <silent> <leader>b :Buffers<cr>
 nnoremap <silent> <leader>c :BCommits<CR>

@@ -114,7 +114,15 @@ if has('wildmenu')
 endif
 
 " Vim clipboard to X11 clipboard
-set clipboard=unnamedplus
+if has("unnamedplus")
+    set clipboard=unnamedplus
+else
+    set clipboard=unnamed
+endif
+
+if has("mac")
+    set clipboard=unnamed
+endif
 
 if has('statusline')
     set laststatus=2

@@ -15,19 +15,18 @@ source $HOME/.zsh/aliases.zsh
 # source $HOME/.zsh/auto-completion-config.zsh
 source $HOME/.zsh/key-bindings.zsh
 source $HOME/.zsh/functions.zsh
-source $HOME/.zsh/dev-environment.zsh
 source $HOME/.zsh/framebuffer-colours.zsh
 source $HOME/.zsh/fzf-config.zsh
-source $HOME/.zsh/brew.zsh
+source $HOME/.zsh/dev-environment.zsh
+
+if [[ "$OSTYPE" == "darwin"* ]] && [ -f "$HOME/.zsh/macos.zsh" ]; then
+    source $HOME/.zsh/macos.zsh
+elif [[ "$OSTYPE" == "linux-gnu" ]] && [ -f "$HOME/.zsh/linux.zsh" ]; then
+    source $HOME/.zsh/linux.zsh
+fi
 
 if [ -d "$HOME/.zsh/work" ] && [ "$(ls -A $HOME/.zsh/work)"]; then
     for file in $HOME/.zsh/work/*(.); do
         source "$file"
     done
-fi
-
-if [ -d "$HOME/.nvm" ] && [ -f "$HOME/.nvm/nvm.sh" ]; then
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 fi

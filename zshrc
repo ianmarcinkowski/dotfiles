@@ -20,6 +20,8 @@ source $HOME/.zsh/framebuffer-colours.zsh
 source $HOME/.zsh/fzf-config.zsh
 source $HOME/.zsh/brew.zsh
 
-for file in $HOME/.zsh/work/*(.); do
-    source "$file"
-done
+if [ -d "$HOME/.zsh/work" ] && [ "$(ls -A $HOME/.zsh/work)"]; then
+    for file in $HOME/.zsh/work/*(.); do
+        source "$file"
+    done
+fi

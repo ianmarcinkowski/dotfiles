@@ -211,11 +211,11 @@ let g:mapleader = ","
 :nmap <leader>dp :diffput<CR>
 
 " Prettify JSON using python
-:nmap <leader>j :%!python -m json.tool<CR>
+" :nmap <leader>j :%!python -m json.tool<CR>
 
 " Change case for the current word
-:nmap <leader>U gUiw
-:nmap <leader>u guiw
+" :nmap <leader>U gUiw
+" :nmap <leader>u guiw
 
 " folding
 " nnoremap <space> za
@@ -224,10 +224,10 @@ let g:mapleader = ","
 noremap K <NOP>
 
 " Kill all trailing whitespace with one keypress!
-:map <F3> :%s/\s\+$//g<cr>
+:map <leader><F3> :%s/\s\+$//g<cr>
 
 " Make all buffers equal size
-:nmap <leader>= <C-w>=
+" :nmap <leader>= <C-w>=
 
 " Change case for the current word
 :nmap <leader>s :source ~/.vim/vimrc<CR>
@@ -246,19 +246,16 @@ nnoremap <leader>GR :Gread<CR>
 nnoremap <leader>GW :Gwrite<CR>
 
 " Autoindent the current buffer and move cursor back to where you were
-:nmap <leader>= gg=G``
+" :nmap <leader>= gg=G``  " must not overrule leader+= to resize buffers 2024
 
 " Remove pasted line numbers at the beginning of a line
-:nmap <leader># :%s/^\d*\s\?//g<CR>
+" :nmap <leader># :%s/^\d*\s\?//g<CR>  " not a feature I really use 2024
 
 " Multi cursor
 let g:multi_cursor_next_key='<C-n>'
 let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
-
-" :Ag leader mapping
-:nmap <leader>a :Ag<CR>
 
 " }}}
 

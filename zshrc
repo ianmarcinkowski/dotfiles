@@ -25,7 +25,7 @@ elif [[ "$OSTYPE" == "linux-gnu" ]] && [ -f "$HOME/.zsh/linux.zsh" ]; then
     source $HOME/.zsh/linux.zsh
 fi
 
-if [ -d "$HOME/.zsh/work" ] && [ "$(ls -A $HOME/.zsh/work)"]; then
+if [ -d "$HOME/.zsh/work" ] && [ "$(ls -A $HOME/.zsh/work)" ]; then
     for file in $HOME/.zsh/work/*(.); do
         source "$file"
     done

@@ -1,3 +1,3 @@
 " Vim clipboard to OSX clipboard
-set clipboard=unnamedplus
+set clipboard=unnamed
 

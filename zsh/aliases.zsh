@@ -19,3 +19,7 @@ alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commi
 alias gunwip='git log -n 1 | grep -q -c "\--wip--" && git reset HEAD~1'
 alias gcdev='gcloud --project=pwademo-40086'
 alias gcprod='gcloud --project=platform-199617'
+
+# Nvim vs vim
+alias vim='nvim'
+

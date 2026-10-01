@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh configuration.
-plugins=(git fzf ssh-agent wd)
+plugins=(git fzf ssh-agent wd nvm)
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="ianmarcinkowski"
 source $ZSH/oh-my-zsh.sh
